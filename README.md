@@ -6,7 +6,7 @@ This repository contains Docker configurations for running a Database Workbench 
 
 - **.gitignore**
 - **Docker-Compose/**
-    - `docker-compose-sql-workbench.yml`
+    - `docker-compose-postgres.yml`
 - **DockerFiles/**
     - `PgAdmin.Dockerfile`
     - `Postgres.Dockerfile`
@@ -40,13 +40,13 @@ This repository contains Docker configurations for running a Database Workbench 
 4. Build the Docker images:
 
     ```bash
-    docker-compose -f docker-compose-sql-workbench.yml build
+    docker-compose -f docker-compose-postgres.yml build
     ```
 
 5. Run the Docker containers:
 
     ```bash
-    docker-compose -f docker-compose-sql-workbench.yml up -d
+    docker-compose -f docker-compose-postgres.yml up -d
     ```
 
     After running these commands, you should have a PostgreSQL server running on port 5432 and a pgAdmin server running on port 80. Connect to the PostgreSQL server with pgAdmin using the credentials in your `.env` file.
@@ -60,7 +60,7 @@ The plan is to extend this setup to include NoSQL databases and other types. Thi
 To stop and remove the containers, run:
 
 ```bash
-docker-compose -f docker-compose-sql-workbench.yml down
+docker-compose -f docker-compose-postgres.yml down
 ```
 
 To remove the Docker volumes, run:

@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  db:
+    container_name: mysql_container
+    build:
+      context: ../../DockerFiles/
+      dockerfile: mysql.Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+  adminer:
+    container_name: adminer_container
+    build:
+      context: ../../DockerFiles/
+      dockerfile: adMiner.Dockerfile
+    ports:
+      - "8080:8080"
+    links:
+      - db
+volumes:
+  db_data:
