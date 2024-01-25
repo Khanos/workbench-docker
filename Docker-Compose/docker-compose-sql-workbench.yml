@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  db:
+    container_name: container-postgresdb
+    build: 
+      context: ../DockerFiles/
+      dockerfile: Postgres.Dockerfile
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  pgadmin:
+    container_name: container-pgadmin
+    build: 
+      context: ../DockerFiles/
+      dockerfile: PgAdmin.Dockerfile
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "80:80"
+    volumes:
+      - pgadmin_data:/root/.pgadmin
+    links:
+      - db
+volumes:
+  db_data:
+  pgadmin_data:
